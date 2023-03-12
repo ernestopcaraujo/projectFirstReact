@@ -68,10 +68,20 @@ function App() {
                                     headers: {"Content-Type":"application/json"}}//configuraçao do tipo de header
                 );
 
+    setTodos((prevState) => [...prevState, todo]);//uma vez que já deu certa a consulta ao servidor obtendo os dados
+                                                  //utilizamos esse código para atualizar a seção de registros
+                                                  //sem a necessidade de recarregarmos a página
+                                                  //com o prevState, adicionamos um ítem ao estado anterior e geramos um novo estado.
+
 
     setTitle("");//aqui os campos title e time são zerados no front para o usuário, sem recarregar a página
     setTime("");//e voltam a mostrar os placeholders nos campos.
 
+  }
+
+  if(loading){
+
+    return <p>Carregando dados...</p>
   }
   
   return (
