@@ -1,0 +1,88 @@
+.App {
+    width: 40%;
+    margin: 2em auto;
+    background-color: #394049;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.todo-header{
+    padding: 0.5em;
+    border-bottom: 1px solid #2c3035;
+    text-align: center;
+}
+
+.todo-header h1{
+    margin: 0;
+}
+
+.form-todo {
+    /* espaçamento interno em todo container do formulário */
+    padding: 1em;
+    
+    /* margem só nas laterais para deixar a borda um pouco maior que o formulário */
+    margin: 0 2em;
+
+    /* para separar a borda da lista */
+    border-bottom: 1px solid #2c3035;
+}
+
+.form-todo h2,
+.list-todo h2 {
+    /* os h2 tanto do form-todo quanto do list-todo serão estilizados
+    com alinhamento ao centro e margem superior zero */
+    text-align: center;
+    margin-top: 0
+}
+
+.form-control {
+    display: flex;
+
+    /* posicionamento dos elementos em colunas, labels e inputs um debaixo do outro */
+    flex-direction: column;
+
+    /* cada elemento (label e input) ficará afastado 1em do outro por essa medida ao fundo*/
+    margin-bottom: 1em;
+}
+
+.form-control label{
+    font-weight: bold;
+
+    /* tamanho da fonte da label */
+    font-size: 0.7em; 
+
+    /* espaçamento entre o fundo da label e o input */
+    margin-bottom: 0.4em;
+}
+
+.form-control input {
+    border: 1px solid #222;
+    border-radius: 2px;
+    background-color: #2c3035;
+    
+    /* para afastar o texto internamente no input */
+    padding: 0.5em; 
+
+    color: #dfdfdf
+}
+
+/* estiliza os inputs apenas do tipo submit */
+input[type="submit"]{ 
+    
+    background-color: #333;
+    color: #eee;
+
+    /* display block para que o botão preencha toda a largura */
+    display: block;
+    
+    width: 100%;
+    border-radius: 5px;
+    padding: 1em;
+
+    /* coloca o cursor com uma mão quando passa sobre o botao */
+    cursor: pointer;
+}
+
+
+
+
