@@ -65,7 +65,8 @@ function App() {
                                                                 //converter um objeto JavaScript em uma string JSON. 
                                                                 //Essa string JSON pode ser enviada no corpo da solicitação POST 
                                                                 //para o servidor JSON.
-                                    headers: {"Content-Type":"application/json"}}//configuraçao do tipo de header
+                                    headers: {"Content-Type":"application/json"}//configuraçao do tipo de header
+                                  }
                 );
 
     setTodos((prevState) => [...prevState, todo]);//uma vez que já deu certa a consulta ao servidor obtendo os dados
@@ -77,10 +78,45 @@ function App() {
     setTitle("");//aqui os campos title e time são zerados no front para o usuário, sem recarregar a página
     setTime("");//e voltam a mostrar os placeholders nos campos.
 
-  }
+  };
+
+  const handleDelete = async (id)=>{
+
+    await fetch (API+"/todos/"+id,{ //o id está vindo como argumento da funçao
+                                    method: "DELETE",
+                                    //não tem corpo (body) e nem header porque não tem corpo.
+                                  }
+                );
+    
+    setTodos((prevState)=>prevState.filter((todo) => todo.id !== id));
+    //aqui o método filter pega o array ToDo no seu estado atual e filtra todas as tarefas cujo id
+    //seja diferente do id que foi escolhido para ser deletado
+    //novamente recorre-se ao prevState para fazer a atualização da página sem a necessidade de
+    //reload.
+
+  };
+
+  const handleEdit = async (todo) => {
+
+    todo.done = !todo.done;//alteração no status da tarefa pelo toggle de inversão: se a tarefa está "pronta"
+                          //ela fica "despronta". Se ela está "despronta" ela fica "pronta".
+
+    const data = await fetch (API+"/todos/"+todo.id,{ //extrai-se o id da tarefa a ser editada pela propriedade, pois o argumento
+                                                      //que foi enviado foi o ToDo completo.
+                                                      //data é uma variáel que irá receber
+                                                      method: "PUT",
+                                                      body: JSON.stringify(todo),
+                                                      headers:{"Content-Type":"application/json"}
+                                                      //não tem corpo (body) e nem header porque não tem corpo.
+                                                    }
+                
+                              );
+    setTodos((prevState)=>prevState.map((t)=>(t.id===data.id) ? (t = data) : t));
+    //cada ToDo é chamado de "t", de modo que se lê: mapeando t (um dado ToDO) tal que se o id do objeto t for igual ao id
+    //do objeto data (que já contém a modificação) então este objeto t será substituído na totalidade pelo objeto data.
+  };
 
   if(loading){
-
     return <p>Carregando dados...</p>
   }
   
@@ -138,16 +174,16 @@ function App() {
             <h3 className={todo.done ? "todo-done" : ""}>Título da Tarefa: {todo.title}</h3>
             <p>Duração: {todo.time}</p>
             <div className='actions'>
-              <span>
+              <span onClick={()=>handleEdit(todo)}>
                 {!todo.done ? <BsBookmarkCheck /> : <BsBookmarkCheckFill /> }
               </span>
-              <BsTrash />
+              <BsTrash onClick={()=>handleDelete(todo.id)} />
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default App;
