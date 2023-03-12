@@ -135,6 +135,11 @@ function App() {
       <div className='list-todo'>
         <h2>Lista de Tarefas:</h2>
         {todos.length === 0 && <p>Não há tarefas cadastradas ainda !</p> }
+        {todos.map((todo)=>(
+          <div className='todo' key={todo.id}>
+            <p>Título da Tarefa: {todo.title}</p>
+          </div>
+        ))}
       </div>
     </div>
 
