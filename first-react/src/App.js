@@ -11,9 +11,11 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Data has been sent");
+  }
+  
   return (
     <div className="App">
       <div className='todo-header'>
@@ -21,6 +23,9 @@ function App() {
       </div>
       <div className='form-todo'>
         <h2>Insira sua próxima tarefa</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="submit" value="Enviar Dados"/>
+        </form>
       </div>
       <div className='list-todo'>
         <h2>Lista de Tarefas:</h2>
