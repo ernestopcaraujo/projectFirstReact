@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 function App() {
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([]);//array de objetos (tarefas)
   const [loading, setLoading] = useState(false);
 
 
@@ -124,19 +124,6 @@ function App() {
             />
           </div>
 
-          {/* <div className='form-control'>
-            <label htmlFor='task'>Tarefa: </label>
-            <input 
-              id='taskDescription' 
-              type="text" 
-              name='task' 
-              placeholder="Descreva sua tarefa"
-              onChange={(e)=>setTodos(e.target.value)}
-              value={todos || ""}
-              required
-            />
-          </div> */}
-          
           <input type="submit" value="Criar Tarefa"/>
 
         </form>
@@ -147,12 +134,19 @@ function App() {
         {todos.length === 0 && <p>Não há tarefas cadastradas ainda !</p> }
         {todos.map((todo)=>(
           <div className='todo' key={todo.id}>
-            <p>Título da Tarefa: {todo.title}</p>
+            {/* implemenatação de uma classe de estilo dinâmica no h3 */}
+            <h3 className={todo.done ? "todo-done" : ""}>Título da Tarefa: {todo.title}</h3>
+            <p>Duração: {todo.time}</p>
+            <div className='actions'>
+              <span>
+                {!todo.done ? <BsBookmarkCheck /> : <BsBookmarkCheckFill /> }
+              </span>
+              <BsTrash />
+            </div>
           </div>
         ))}
       </div>
     </div>
-
   );
 }
 
