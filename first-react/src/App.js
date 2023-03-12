@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import {BsTrash, BsBookmarkCheck, BsBookmarkCheckFill} from 'react-icons/bs';
 
 const API = "http://localhost:5000";
+const { v4: uuidv4 } = require('uuid');
 
 function App() {
   const [title, setTitle] = useState("");
@@ -20,7 +21,24 @@ function App() {
   //função que criei+C para melhorar a greação de id aleatório. posteriormente substituí+C pelo uso do
   //da biblioteca UUID que é mais segura. 
 
-  const { v4: uuidv4 } = require('uuid');
+  useEffect(()=>{
+      const loadData = async () => {
+        setLoading(true);//porque ainda estarão sendo carregados os dados para a aplicação
+        
+        const res = await fetch (API+'/todos', {
+                                                  method:"GET",
+                                                  headers: {"Content-Type":"application/json"}
+                                                })//não precisa configurar a requisição pois o padrão é um GET
+                                                //porém configurei assim mesmo, para estudo.
+          .then((res)=>res.json())
+          .then((data)=>data)
+          .catch((err)=> console.log(err));
+    
+        setLoading(false);
+        setTodos(res);                                                            
+      };
+      loadData();
+  },[]);
 
 
   const handleSubmit = async (e) => { //essa função trata da execução da submissão do formulário 
@@ -47,7 +65,7 @@ function App() {
                                                                 //converter um objeto JavaScript em uma string JSON. 
                                                                 //Essa string JSON pode ser enviada no corpo da solicitação POST 
                                                                 //para o servidor JSON.
-                                    headers: {"Content-Type":"application/json"}}
+                                    headers: {"Content-Type":"application/json"}}//configuraçao do tipo de header
                 );
 
 
