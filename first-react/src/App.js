@@ -12,16 +12,19 @@ function App() {
   const [loading, setLoading] = useState(false);
 
 
+
+
   return (
     <div className="App">
       <div className='todo-header'>
         <h1>React ToDo</h1>
       </div>
-      <div className='todo-form'>
-        <p>Formulario</p>
+      <div className='form-todo'>
+        <h2>Insira sua próxima tarefa</h2>
       </div>
-      <div className='todo-list'>
-        <p>Lista</p>
+      <div className='list-todo'>
+        <h2>Lista de Tarefas:</h2>
+        {todos.length === 0 && <p>Não há tarefas cadastradas ainda !</p> }
       </div>
     </div>
   );
