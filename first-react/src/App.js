@@ -13,6 +13,8 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(title);
+    setTitle("")
     console.log("Data has been sent");
   }
   
@@ -23,7 +25,23 @@ function App() {
       </div>
       <div className='form-todo'>
         <h2>Insira sua próxima tarefa</h2>
-        <form onSubmit={handleSubmit}>
+        <form id='formToDo' onSubmit={handleSubmit}>
+          <div className='form-control'>
+            <label htmlFor='title'>O que você vai fazer ?</label>
+            <input 
+              id='taskTitle' 
+              type="text" 
+              name='title' 
+              placeholder="Título da sua próxima tarefa"
+              onChange={(e)=>setTitle(e.target.value)} //essa linha captura a alteração no input e altera o estado do objeto. ou seja está sendo colocado no estado o valor do input digitado pelo usuario
+              value={title || ""} //essa linha usa uma técnica chamada controlled input, onde o value recebe o estado do input. Isso permite depois passar para o setTitle, modificando o texto que ele está escrito.
+                            //isso serve pra limpar o input depois se for necessário.
+                            //a inicialização vazia é necessária porque o estado é preenchido depois de um tempo
+                            //e isso gera um erro. para corrigir, colocamos o || "" para que ele incie com o
+                            //vazio e depois faça a troca.
+              required
+            />
+          </div>
           <input type="submit" value="Enviar Dados"/>
         </form>
       </div>
