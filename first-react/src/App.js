@@ -11,6 +11,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
+
   // function idRandom() {
   //   const randomNumber = Math.floor(Math.random()*10000);
   //   const timeStamp = Date.now();
@@ -22,8 +23,10 @@ function App() {
   const { v4: uuidv4 } = require('uuid');
 
 
-  const handleSubmit = (e) => { //essa função trata da execução da submissão do formulário 
-                                //sem gerar uma situação de recarregamento da página
+  const handleSubmit = async (e) => { //essa função trata da execução da submissão do formulário 
+                                //sem gerar uma situação de recarregamento da página.
+                                //outra coisa importante é a adição do asyn-await para
+                                //aguardar o retorno do back-end.
     e.preventDefault(); //esse comando é dado por essa propriedade (preventDefault()) aplicada ao evento "e".
     
     console.log(title);//essas 3 linhas mostram o estado atual de tempo e title e confirmam
@@ -37,6 +40,16 @@ function App() {
       done: false //por default, colocaremos as tarefas inicialmente com "não feitas" ou seja com o "done" em "false"
     }
     console.log(todo)
+
+    await fetch (API + '/todos', {// aqui enviamos os dados para o back-end
+                                    method:"POST", //configuração do tipo de requisição que está sendo feita
+                                    body: JSON.stringify(todo), //A linha de comando body: JSON.stringify(object) é usada para 
+                                                                //converter um objeto JavaScript em uma string JSON. 
+                                                                //Essa string JSON pode ser enviada no corpo da solicitação POST 
+                                                                //para o servidor JSON.
+                                    headers: {"Content-Type":"application/json"}}
+                );
+
 
     setTitle("");//aqui os campos title e time são zerados no front para o usuário, sem recarregar a página
     setTime("");//e voltam a mostrar os placeholders nos campos.
