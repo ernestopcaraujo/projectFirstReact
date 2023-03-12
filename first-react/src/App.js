@@ -11,11 +11,14 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => { //essa função trata da execução da submissão do formulário 
+                                //sem gerar uma situação de recarregamento da página
+    e.preventDefault(); //esse comando é dado por essa propriedade (preventDefault()) aplicada ao evento "e".
+    console.log("Tarefa Criada");
     console.log(title);
-    setTitle("")
-    console.log("Data has been sent");
+    console.log(time);
+    setTitle("");
+    setTime("");
   }
   
   return (
@@ -25,7 +28,9 @@ function App() {
       </div>
       <div className='form-todo'>
         <h2>Insira sua próxima tarefa</h2>
+        
         <form id='formToDo' onSubmit={handleSubmit}>
+          
           <div className='form-control'>
             <label htmlFor='title'>O que você vai fazer ?</label>
             <input 
@@ -41,15 +46,45 @@ function App() {
                             //vazio e depois faça a troca.
               required
             />
+
+            </div>
+            <div className='form-control'>
+            <label htmlFor='time'>Duração: </label>
+            <input 
+              id='taskTime' 
+              type="text" 
+              name='time' 
+              placeholder="Tempo estimado em horas"
+              onChange={(e)=>setTime(e.target.value)}
+              value={time || ""}
+              required
+            />
           </div>
-          <input type="submit" value="Enviar Dados"/>
+
+          {/* <div className='form-control'>
+            <label htmlFor='task'>Tarefa: </label>
+            <input 
+              id='taskDescription' 
+              type="text" 
+              name='task' 
+              placeholder="Descreva sua tarefa"
+              onChange={(e)=>setTodos(e.target.value)}
+              value={todos || ""}
+              required
+            />
+          </div> */}
+          
+          <input type="submit" value="Criar Tarefa"/>
+
         </form>
       </div>
+
       <div className='list-todo'>
         <h2>Lista de Tarefas:</h2>
         {todos.length === 0 && <p>Não há tarefas cadastradas ainda !</p> }
       </div>
     </div>
+    
   );
 }
 
