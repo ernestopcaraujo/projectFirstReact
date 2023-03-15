@@ -119,11 +119,11 @@ function App() {
   if(loading){
     return <p>Carregando dados...</p>
   }
-  
+  //npm run server npm start
   return (
     <div className="App">
       <div className='todo-header'>
-        <h1>React ToDo</h1>
+        <h1>Project ToDo React</h1>
       </div>
       <div className='form-todo'>
         <h2>Insira sua próxima tarefa</h2>
