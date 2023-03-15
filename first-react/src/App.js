@@ -119,11 +119,11 @@ function App() {
   if(loading){
     return <p>Carregando dados...</p>
   }
-  
+  //npm run server npm start
   return (
     <div className="App">
       <div className='todo-header'>
-        <h1>React ToDo</h1>
+        <h1>Project ToDo React</h1>
       </div>
       <div className='form-todo'>
         <h2>Insira sua próxima tarefa</h2>
@@ -171,7 +171,7 @@ function App() {
         {todos.map((todo)=>(
           <div className='todo' key={todo.id}>
             {/* implemenatação de uma classe de estilo dinâmica no h3 */}
-            <h3 className={todo.done ? "todo-done" : ""}>Título da Tarefa: {todo.title}</h3>
+            <h3 className={todo.done ? "todo-done" : ""}>Tarefa: {todo.title}</h3>
             <p>Duração: {todo.time}</p>
             <div className='actions'>
               <span onClick={()=>handleEdit(todo)}>
