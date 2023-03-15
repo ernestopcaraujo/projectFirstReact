@@ -171,7 +171,7 @@ function App() {
         {todos.map((todo)=>(
           <div className='todo' key={todo.id}>
             {/* implemenatação de uma classe de estilo dinâmica no h3 */}
-            <h3 className={todo.done ? "todo-done" : ""}>Título da Tarefa: {todo.title}</h3>
+            <h3 className={todo.done ? "todo-done" : ""}>Tarefa: {todo.title}</h3>
             <p>Duração: {todo.time}</p>
             <div className='actions'>
               <span onClick={()=>handleEdit(todo)}>
